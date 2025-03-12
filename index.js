@@ -5,6 +5,7 @@ const express = require('express'),
       axios = require('axios'),
       port = process.env.PORT || 8080,
       app = express();
+
 require('dotenv').config(); 
 app.use(express.json());
 
@@ -16,6 +17,7 @@ app.post('/send-message', async (req, res) => {
   const { text } = req.body,
         botToken = process.env.BOT_TOKEN,
         chatId = process.env.CHAT_ID;
+  
   try {
     const response = await axios.post(`https://api.telegram.org/bot${botToken}/sendMessage`, {
       chat_id: chatId,
@@ -34,7 +36,7 @@ app.post('/send-message', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log('Server is Live on Port ' + PORT);
+  console.log('Server is Live on Port ' + port);
 });
 
 module.exports = app;
